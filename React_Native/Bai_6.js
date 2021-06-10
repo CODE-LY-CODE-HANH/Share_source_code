@@ -76,7 +76,7 @@ export default function App() {
         }, 2000);
       }  }
       onEndReachedThreshold = {0.1}
-      // 0853460198 ZALO
+      // 0853460198 ZAL
       />
 
       <StatusBar style="auto" />
