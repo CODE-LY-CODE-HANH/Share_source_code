@@ -1,5 +1,5 @@
 var http = require("http"); // tham chiếu thư viện http
-var ham = require("./ham");
+var ham = require("./ham"); // tham chiếu module hàm
 
 var server = http.createServer(function(req , res) {
     res.writeHead(200 , {"Content-Type" : "text/html"});
