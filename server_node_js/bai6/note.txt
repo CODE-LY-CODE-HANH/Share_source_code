@@ -1,0 +1,26 @@
+npm install mysql --save
+
+You have successfully created a new database. The details are below.
+
+Username: JnWiETIzRg
+
+Database name: JnWiETIzRg
+
+Password: 47tKHpVqR3
+
+Server: remotemysql.com
+
+Port: 3306
+
+These are the username and password to log in to your database and phpMyAdmin
+
+Make sure you keep your password secure. Ensure you keep back ups of your database in case it gets deleted.
+
+
+--** MongoDB 
+
+user : user2707
+
+pass : CywzzWCK5989xXkG 
+
+mongodb+srv://user2707:PF6LKT9FtXO2of6s@cluster0.yhi4n.mongodb.net/Lab6?retryWrites=true&w=majority
