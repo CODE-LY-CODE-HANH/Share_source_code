@@ -1,0 +1,6 @@
+npm init
+npm install --save-dev nodemon
+npm install express --save
+
+npm install mongodb --save
+npm install mongoose --save
