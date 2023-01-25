@@ -1,81 +1,48 @@
-# import requests
-# from playsound import playsound
-# import json
-# import os
-# from time import sleep
-#
-# url = 'https://api.fpt.ai/hmi/tts/v5'
-#
-# payload = ''
-#
-# with open("text.txt" , "r" , encoding="utf-8") as f:
-#     payload = f.read()
-#     print(f"Hiện tại file có {len(payload)}  Ký tự")
-#     f.close()
-#
-# if len(payload ) < 5000 :
-#     headers = {
-#         'api-key': 'hNwVz5B9l6M0UbFp4PvRURw1tA39K3r1',
-#         'speed': '1',
-#         'voice': 'banmai'
-#     }
-#
-#     response = requests.request('POST', url, data=payload.encode('utf-8'), headers=headers)
-#
-#     a = json.loads(response.text)
-#
-#     # print(a)
-#     print(a['async'])
-#     doc = requests.get(a['async'])
-#
-#     with open('myfile.mp3', 'wb') as f:
-#         f.write(doc.content)
-#         f.close()
-#
-#     sleep(3)
-#
-#     # playsound('myfile.mp3')
-#     # os.remove('myfile.mp3')
-#     os.system("myfile.mp3")
-
-import speech_recognition
-import pyttsx3
-import datetime
+import speech_recognition as sr
+import openai
 
 
+def get_audio():
+    ear_robot = sr.Recognizer()
 
-robot_ear = speech_recognition.Recognizer()
-robot_mouth = pyttsx3.init()
-robot_brain = ""
+    with sr.Microphone() as source:
+        print("Trợ Lý Ảo:  Đang nghe ! -- __ -- !")
 
-while True:  # cái này để mình và robot giao tiếp liên tục thay vì nói 1 câu chương trình đã kết thúc.
-    with speech_recognition.Microphone() as mic:
-        print("Robot: I'm Listening")
-        audio = robot_ear.record(mic , duration=5)
-    try:
-        you = robot_ear.recognize_google(audio)
-        you = str(you).lower()
-    except Exception as ex :
-        print(ex)
-        you = "lỗi"
+        # ear_robot.pause_threshold = 4
+        # audio = ear_robot.record(source , duration= 4)
+        # ear_robot.language = "vi-VN"
+        audio = ear_robot.listen(source)
+        # audio = ear_robot.listen(source, phrase_time_limit=5)
 
-    if you == "lỗi":
-        robot_brain = "I thank you "
-    elif "hello" in you:  # in you này thay vì chúng ta nói Hello sẽ trả ra
-        # "Hello python thì nó sẽ kiểm tra là trong câu mà bạn nói có từ Hello hay không ?
-        robot_brain: "Hello Python"
-    elif "today" in you:
-        today = datetime.date.today()
-        robot_brain = today.strftime("%B %d, %Y")
-    elif "time" in you:
-        now = datetime.today()
-        robot_brain = now.strftime("%H hours %M minutes %S seconds")
-    elif "goodbye" in you:  ## đoạn này khi nói goodbye thì chương trình sẽ tắt thay vì mở liên tục khi ở phía trên
-        robot_brain = "Good Bye"
-        break
-    else:
-        robot_brain = "I'm fine thank you and you"
+        try:
+            print(("Trợ Lý Ảo :  ...  "))
+            # text = ear_robot.recognize(audio)
+            text = ear_robot.recognize_google(audio, language="vi-VN")
+            # print("Tôi:  ", text)
+            return text
+        except Exception as ex:
+            print("Trợ Lý Ảo:  Lỗi Rồi ! ... !")
+            return ""
 
-    print("Robot: " + robot_brain)
-    robot_mouth.say(robot_brain)
-    robot_mouth.runAndWait()
+
+openai.api_key = "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"
+
+start_sequence = "\nAI:"
+restart_sequence = "\nHuman: "
+
+cau_hoi = input("Speech : ")
+
+response = openai.Completion.create(
+    model="text-davinci-003",
+    prompt=f"The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: {cau_hoi}\nAI: ",
+    temperature=0.9,
+    max_tokens=300,
+    top_p=1,
+    frequency_penalty=0,
+    presence_penalty=0.6,
+    stop=[" Human:", " AI:"]
+)
+
+text = response['choices'][0]['text']
+print(text)
+print(f"Response length is : {len(text)}")

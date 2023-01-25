@@ -46,5 +46,4 @@ def ham_ngoai():
    ham_trong()
    print("Bên ngoài:", x)
 
-
 ham_ngoai()
