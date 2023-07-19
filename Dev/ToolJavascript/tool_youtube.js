@@ -1,4 +1,4 @@
-// Cuộn để cày giờ xem
+// Cuộn để cày giờ xem asd
 javascript: (function () {
     setInterval(() => {
         const randomNumber = Math.floor(Math.random() * 2) + 1;
