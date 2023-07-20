@@ -1,4 +1,3 @@
-// Cuộn để cày giờ xem
 javascript: (function () {
     setInterval(() => {
         const randomNumber = Math.floor(Math.random() * 2) + 1;
@@ -30,6 +29,20 @@ javascript: (function () {
     function btn_play(btn) {
         if (btn.getAttribute('title') === 'Phát (k)') {
             btn.click();
+            console.log('Đã nhấn và tiếp tục phát Video ...');
+        }
+
+        const btn_Replay = document.querySelector('#confirm-button > yt-button-shape > button');
+        if (btn_Replay.getAttribute('aria-label') === 'Có') {
+            btn_Replay.click();
+            console.log('Đã clicked và tiếp tục ...');
         }
     }
 })();
+// ---------------------------------------------------------------------------------
+javascript: (function () {
+    setInterval(() => {
+        console.log(Math.floor(Math.random() * 10000));
+    }, 1000);
+})();
+// ---------------------------------------------------------------------------------
