@@ -10,8 +10,9 @@
 
 from time import sleep
 import os
+from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 import requests
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -24,7 +25,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # }
 # chrome_options.add_experimental_option("prefs", prefs)
 
-driver = webdriver.Chrome('./chromedriver')
+driver = webdriver.Chrome("chromedriver.exe")
 # driver = webdriver.Chrome('./chromedriver', options=chrome_options)
 # driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
 
@@ -52,13 +53,13 @@ driver.get(url)
 #     sleep(1)
 
 
-sum = 0
+# sum = 0
 
-html = driver.page_source
+# html = driver.page_source
 
 # html = requests.get(url).text
 
-soup = BeautifulSoup(html, 'html.parser')
+# soup = BeautifulSoup(html, 'html.parser')
 # dem = 0
 # for link in soup.find_all('img'):
 #     url = link.get('src')
@@ -76,19 +77,19 @@ soup = BeautifulSoup(html, 'html.parser')
 # print(f'sum :  {sum}')
 # print(soup)
 
-for i in soup.find_all("h3"):
-    class_H3 = i.get('class')
-
-    if (i.get("class")) != None:
-        if class_H3[0] == "titlecom":
-
-            # print(i.parent)
-            print(i.contents[0].strip())
+# for i in soup.find_all("h3"):
+#     class_H3 = i.get('class')
+#
+#     if (i.get("class")) != None:
+#         if class_H3[0] == "titlecom":
+#
+#             # print(i.parent)
+#             print(i.contents[0].strip())
 # for i in soup.find_all("img"):
 #
 #     if (i.get("class")) != None:
 #         if (i.get("class"))[0] == "lazyloaded":
 #             print(i.get('src'))
 
-# sleep(1000)
+sleep(1000)
 driver.quit()
